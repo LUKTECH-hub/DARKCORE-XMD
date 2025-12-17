@@ -3,7 +3,7 @@ services:
     name: DARKCORE-XMD
     env: node
     plan: free
-    repo: https://github.com/denavigator/Denavi-MD
+    repo: https://github.com/lukman549/DARKCORE-XMD
     branch: main
     buildCommand: npm install
     startCommand: npm start
@@ -16,7 +16,7 @@ services:
       - key: STICKER_NAME
         sync: false
       - key: PREFIX
-        sync: false
+        sync: "/"
       - key: MODE
         sync: false
       - key: ALWAYS_ONLINE
@@ -46,9 +46,9 @@ services:
       - key: ANTI_BAD_WORD
         sync: false
       - key: AUTO_RECORDING
-        sync: false
+        sync: true
       - key: AUTO_TYPING
-        sync: false
+        sync: true
       - key: AUTO_REACT
         sync: false
       - key: CUSTOM_REACT
