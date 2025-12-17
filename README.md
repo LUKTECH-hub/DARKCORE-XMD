@@ -1,4 +1,4 @@
----<img src="https://github.com/lukman549/DARKCORE-XMD/raw/main/banner.png" width="300"/>
+
 
 
 <p align="center">
