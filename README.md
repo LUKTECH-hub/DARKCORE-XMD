@@ -92,6 +92,9 @@ Educational use only. Developer not responsible for misuse.
 <p align="center"><b>⭐ Star & Fork to support DARKCORE-XMD</b></p>
 ```
 ---
+[![Disclaimer](https://img.shields.io/badge/⚠️-Disclaimer%20%7C%20Use%20Responsibly-neon?style=for-the-badge&color=ff0066&logo=appveyor&logoColor=white)](https://github.com/lukman549/DARKCORE-XMD#disclaimer)
+DARKCORE-XMD is provided for educational and development purposes only. The owner is not responsible for any misuse or damages resulting from the use of this software. By using this project, you agree to act responsibly.
+
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/lukman549/DARKCORE-XMD?style=for-the-badge&logo=github&logoColor=white&label=Star)](https://github.com/lukman549/DARKCORE-XMD/stargazers) [![Fork on GitHub](https://img.shields.io/github/forks/lukman549/DARKCORE-XMD?style=for-the-badge&logo=github&logoColor=white&label=Fork)](https://github.com/lukman549/DARKCORE-XMD/fork) [![Support the Repo](https://img.shields.io/badge/Support-⭐%20the%20Repo-brightgreen?style=for-the-badge)](https://github.com/lukman549/DARKCORE-XMD)
 ---
