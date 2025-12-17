@@ -1,8 +1,8 @@
 {
-  "name": "Denavi-MD",
+  "name": "DARKCORE-XMD",
   "description": "Javascript WhatsApp bot made by Denavi-MD",
   "logo": "https://files.catbox.moe/p4yxcn.png",
-  "keywords": ["Denavi-MD"],
+  "keywords": ["DARKCORE-XMD"],
   "success_url": "/",
 
     "stack": "container",
@@ -16,7 +16,7 @@
     "STICKER_NAME": {
       "description": "type your sticker pack name.",
       "required": false,
-      "value": "Denavi-MD"
+      "value": "DARKCORE-XMD"
     }, 
       
     "PREFIX": {
@@ -91,14 +91,14 @@
     "OWNER_NUMBER": {
       "description": "put the owner number for bot.",
       "required": false,
-      "value": "923495178663"
+      "value": "256758715401"
 
     }, 
 
     "BOT_NAME": {
       "description": "Type here the bot name.",
       "required": false,
-      "value": "𝙀3_𝙃𝘼𝘾𝙆𝙀𝙍_𝙈𝘿"
+      "value": "DARKCORE-XMD"
 
       }, 
 
@@ -137,7 +137,7 @@
      "DESCRIPTION": {
       "description": "add caption for menu and other",
       "required": false,
-      "value": "**© ᴘᴏᴡᴇʀᴇᴅ ʙʏ 𝙀3_𝙃𝘼𝘾𝙆𝙀𝙍_𝙈𝘿 ❣️*"
+      "value": "**© ᴘᴏᴡᴇʀᴇᴅ ʙʏ DARKCORE-XMD ❣️*"
     },
 
       "DELETE_LINKS": {
