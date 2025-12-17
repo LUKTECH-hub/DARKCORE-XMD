@@ -1,4 +1,5 @@
-
+<p align="center">
+  <img src="https://raw.githubusercontent.com/lukman549/DARKCORE-XMD/main/darkcore-banner.png" alt="DARKCORE-XMD Banner">
 
 
 <p align="center">
