@@ -1,6 +1,6 @@
 <p align="center">
   <img src="
-https://raw.githubusercontent.com/file_000000005a74720c9dde4302d7598716.png/darkcore-banner.png.png" alt="DARKCORE-XMD Banner">
+https://raw.githubusercontent.com/file_000000005a74720c9dde4302d7598716.png/darkcore-banner.png.png" alt="file_000000005a74720c9dde4302d7598716.png">
 
 
 <p align="center">
