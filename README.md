@@ -78,6 +78,9 @@ BOT_NAME=DARKCORE-XMD
 ---
 
 
+---
+support
+
 
 
 ---
@@ -89,6 +92,8 @@ Educational use only. Developer not responsible for misuse.
 <p align="center"><b>⭐ Star & Fork to support DARKCORE-XMD</b></p>
 ```
 ---
+---
+[![Star on GitHub](https://img.shields.io/github/stars/lukman549/DARKCORE-XMD?style=for-the-badge&logo=github&logoColor=white&label=Star)](https://github.com/lukman549/DARKCORE-XMD/stargazers) [![Fork on GitHub](https://img.shields.io/github/forks/lukman549/DARKCORE-XMD?style=for-the-badge&logo=github&logoColor=white&label=Fork)](https://github.com/lukman549/DARKCORE-XMD/fork) [![Support the Repo](https://img.shields.io/badge/Support-⭐%20the%20Repo-brightgreen?style=for-the-badge)](https://github.com/lukman549/DARKCORE-XMD)
 ---
 [![WhatsApp Chat](https://img.shields.io/badge/WhatsApp-Chat%20with%20Owner-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/256758715404) [![Support Group](https://img.shields.io/badge/WhatsApp-Join%20Support%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/YOUR_GROUP_LINK) [![Email Owner](https://img.shields.io/badge/Email-Contact%20Owner-0099ff?style=for-the-badge&logo=gmail&logoColor=white)](mailto:asumanlukomwa001@gmail.com)
 
