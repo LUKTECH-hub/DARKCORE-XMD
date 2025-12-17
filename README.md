@@ -29,7 +29,17 @@
 [![Deploy on Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel)](https://vercel.com/new/clone?repository-url=https://github.com/lukman549/DARKCORE-XMD)  
 [![Deploy on Render](https://img.shields.io/badge/Deploy-Render-3C3C3D?style=for-the-badge&logo=render)](https://render.com/deploy)  
 [![Deploy Panel](https://img.shields.io/badge/Deploy-Panel-4CAF50?style=for-the-badge&logo=appveyor)](https://your-panel-deploy-link.com)
+---
+🔐 Pair Your WhatsApp Session
 
+<p align="center">
+  <a href="https://darkcore-xmd.onrender.com">
+    <img src="https://img.shields.io/badge/PAIR%20SITE-OPEN%20ON%20RENDER-46E3B7?style=for-the-badge&logo=render&logoColor=white" />
+  </a>
+</p>
+
+> Click the button above to open the **DARKCORE-XMD Pair Site** and generate your WhatsApp session.
+> 
 ---
 
 
