@@ -90,6 +90,7 @@ Educational use only. Developer not responsible for misuse.
 ```
 ---
 ---
-[![WhatsApp Chat](https://img.shields.io/badge/💬-Chat%20with%20Owner-00ff00?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/256758715404) [![Support Group](https://img.shields.io/badge/👥-Join%20Support%20Group-00cc66?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/YOUR_GROUP_LINK) [![Email Owner](https://img.shields.io/badge/✉️-Email%20Owner-0099ff?style=for-the-badge&logo=gmail&logoColor=white)](mailto: asumanlukomwa001@gmail.com)
+[![WhatsApp Chat](https://img.shields.io/badge/WhatsApp-Chat%20with%20Owner-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/256758715404) [![Support Group](https://img.shields.io/badge/WhatsApp-Join%20Support%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/YOUR_GROUP_LINK) [![Email Owner](https://img.shields.io/badge/Email-Contact%20Owner-0099ff?style=for-the-badge&logo=gmail&logoColor=white)](mailto:asumanlukomwa001@gmail.com)
+
 
 
