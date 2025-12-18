@@ -10,35 +10,49 @@
       text-align:center;
       padding-top:60px;
     }
-    button {
-      padding:15px 30px;
-      font-size:18px;
-      background:#00ffcc;
+    input, button {
+      padding:12px;
+      font-size:16px;
+      border-radius:6px;
       border:none;
-      border-radius:8px;
+      margin:6px;
+    }
+    input {
+      width:220px;
+    }
+    button {
+      background:#00ffcc;
       cursor:pointer;
     }
   </style>
 </head>
 <body>
 
-<h1>DARKCORE-XMD SESSION PAIR</h1>
-<p>Click button to generate pairing code</p>
+<h1>DARKCORE-XMD PAIR SITE</h1>
+<p>Enter WhatsApp number with country code</p>
 
-<button onclick="pair()">PAIR NOW</button>
+<input id="number" placeholder="2567XXXXXXXX" />
+<br>
+<button onclick="pair()">REQUEST CODE</button>
 
 <h2 id="code"></h2>
 
 <script>
 async function pair() {
-  document.getElementById("code").innerText = "Generating...";
-  const res = await fetch("/pair");
+  const number = document.getElementById("number").value;
+  if (!number) {
+    alert("Enter phone number");
+    return;
+  }
+  document.getElementById("code").innerText = "Generating code...";
+  const res = await fetch(`/pair?number=${number}`);
   const data = await res.json();
-  document.getElementById("code").innerText = data.code || data.status;
+  document.getElementById("code").innerText = data.code || data.error;
 }
 </script>
 
 </body>
 </html>
+
 
   
