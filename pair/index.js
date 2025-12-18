@@ -47,47 +47,32 @@ app.get("/pair", async (req, res) => {
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-
-const {
-  default: makeWASocket,
-  useMultiFileAuthState
-} = require("@whiskeysockets/baileys");
-
+const { default: makeWASocket, useMultiFileAuthState } = require("@whiskeysockets/baileys");
 const pino = require("pino");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// Session directory (isolated for pair site)
 const SESSION_DIR = path.join(__dirname, "session");
 
 // Ensure session folder exists
-if (!fs.existsSync(SESSION_DIR)) {
-  fs.mkdirSync(SESSION_DIR, { recursive: true });
-}
+if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
 
 // Serve static files (pair.html)
 app.use(express.static(__dirname));
 
-/**
- * Pairing endpoint
- * Example: /pair?number=2567XXXXXXXX
- */
+let isPairing = false;
+
 app.get("/pair", async (req, res) => {
+  if (isPairing) return res.json({ error: "Pairing already in progress. Wait 60 seconds." });
+
+  const number = req.query.number;
+  if (!number) return res.json({ error: "Phone number required" });
+  if (!/^[0-9]{8,15}$/.test(number)) return res.json({ error: "Invalid number format" });
+
   try {
-    const number = req.query.number;
-
-    if (!number) {
-      return res.json({ error: "Phone number is required" });
-    }
-
-    // Basic number validation
-    if (!/^[0-9]{8,15}$/.test(number)) {
-      return res.json({ error: "Invalid phone number format" });
-    }
+    isPairing = true;
 
     const { state, saveCreds } = await useMultiFileAuthState(SESSION_DIR);
-
     const sock = makeWASocket({
       auth: state,
       printQRInTerminal: false,
@@ -95,34 +80,26 @@ app.get("/pair", async (req, res) => {
       browser: ["DARKCORE-XMD", "Chrome", "1.0"]
     });
 
-    // Save credentials on update
     sock.ev.on("creds.update", saveCreds);
 
-    // If not registered, request pairing code
     if (!sock.authState.creds.registered) {
       const code = await sock.requestPairingCode(number);
+      setTimeout(() => { isPairing = false; }, 60000); // unlock after 60s
       return res.json({ code });
     }
 
-    return res.json({
-      status: "Already paired",
-      message: "Session already exists"
-    });
+    isPairing = false;
+    res.json({ status: "Already paired" });
 
   } catch (err) {
-    console.error("Pair error:", err);
-    return res.json({
-      error: "Failed to generate pairing code"
-    });
+    isPairing = false;
+    res.json({ error: "Pairing failed. Retry later." });
   }
 });
 
-// Home page → pair.html
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "pair.html"));
-});
+// Home page
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "pair.html")));
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`DARKCORE-XMD Pair Site running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`DARKCORE-XMD Pair Site running on port ${PORT}`));
+
+        
