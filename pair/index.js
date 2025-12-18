@@ -1,3 +1,49 @@
+let isPairing = false;
+
+app.get("/pair", async (req, res) => {
+  if (isPairing) {
+    return res.json({ error: "Pairing already in progress. Wait 1 minute." });
+  }
+
+  try {
+    isPairing = true;
+
+    const number = req.query.number;
+    if (!number) {
+      isPairing = false;
+      return res.json({ error: "Number required" });
+    }
+
+    const { state, saveCreds } = await useMultiFileAuthState(SESSION_DIR);
+
+    const sock = makeWASocket({
+      auth: state,
+      printQRInTerminal: false,
+      logger: pino({ level: "silent" }),
+      browser: ["DARKCORE-XMD", "Chrome", "1.0"]
+    });
+
+    sock.ev.on("creds.update", saveCreds);
+
+    if (!sock.authState.creds.registered) {
+      const code = await sock.requestPairingCode(number);
+
+      // Auto-unlock after 60 seconds
+      setTimeout(() => {
+        isPairing = false;
+      }, 60000);
+
+      return res.json({ code });
+    }
+
+    isPairing = false;
+    res.json({ status: "Already paired" });
+
+  } catch (err) {
+    isPairing = false;
+    res.json({ error: "Pairing failed" });
+  }
+});
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
