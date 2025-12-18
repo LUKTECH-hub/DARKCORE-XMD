@@ -1,59 +1,78 @@
-const express = require("express");
-const path = require("path");
-const fs = require("fs");
-const { default: makeWASocket, useMultiFileAuthState } = require("@whiskeysockets/baileys");
-const pino = require("pino");
+const express = require('express')
+const QRCode = require('qrcode')
+const {
+  default: makeWASocket,
+  useMultiFileAuthState,
+  fetchLatestBaileysVersion,
+  DisconnectReason
+} = require('@whiskeysockets/baileys')
+const Pino = require('pino')
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-const SESSION_DIR = path.join(__dirname, "session");
+const app = express()
+const PORT = process.env.PORT || 3000
 
-// Ensure session folder exists
-if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
+let qrCodeData = null
 
-// Serve static files (pair.html)
-app.use(express.static(__dirname));
+async function startBot() {
+  const { state, saveCreds } = await useMultiFileAuthState('./session')
+  const { version } = await fetchLatestBaileysVersion()
 
-let isPairing = false;
+  const sock = makeWASocket({
+    version,
+    auth: state,
+    printQRInTerminal: false,
+    logger: Pino({ level: 'silent' }),
+    browser: ['DARKCORE-XMD', 'Chrome', '120.0']
+  })
 
-app.get("/pair", async (req, res) => {
-  if (isPairing) return res.json({ error: "Pairing already in progress. Wait 60 seconds." });
+  sock.ev.on('creds.update', saveCreds)
 
-  const number = req.query.number;
-  if (!number) return res.json({ error: "Phone number required" });
-  if (!/^[0-9]{8,15}$/.test(number)) return res.json({ error: "Invalid number format" });
+  sock.ev.on('connection.update', async (update) => {
+    const { connection, lastDisconnect, qr } = update
 
-  try {
-    isPairing = true;
-
-    const { state, saveCreds } = await useMultiFileAuthState(SESSION_DIR);
-    const sock = makeWASocket({
-      auth: state,
-      printQRInTerminal: false,
-      logger: pino({ level: "silent" }),
-      browser: ["DARKCORE-XMD", "Chrome", "1.0"]
-    });
-
-    sock.ev.on("creds.update", saveCreds);
-
-    if (!sock.authState.creds.registered) {
-      const code = await sock.requestPairingCode(number);
-      setTimeout(() => { isPairing = false; }, 60000); // unlock after 60s
-      return res.json({ code });
+    if (qr) {
+      qrCodeData = await QRCode.toDataURL(qr)
+      console.log('📲 QR generated — open /qr')
     }
 
-    isPairing = false;
-    res.json({ status: "Already paired" });
+    if (connection === 'open') {
+      qrCodeData = null
+      console.log('✅ WhatsApp connected')
+    }
 
-  } catch (err) {
-    isPairing = false;
-    res.json({ error: "Pairing failed. Retry later." });
+    if (connection === 'close') {
+      const reason = lastDisconnect?.error?.output?.statusCode
+      if (reason !== DisconnectReason.loggedOut) {
+        startBot()
+      } else {
+        console.log('❌ Logged out — delete session folder')
+      }
+    }
+  })
+}
+
+app.get('/', (req, res) => {
+  res.send('✅ DARKCORE-XMD is running')
+})
+
+app.get('/qr', (req, res) => {
+  if (!qrCodeData) {
+    return res.send('✅ QR already scanned or not generated yet')
   }
-});
+  res.send(`
+    <html>
+      <body style="display:flex;justify-content:center;align-items:center;height:100vh;">
+        <img src="${qrCodeData}" />
+      </body>
+    </html>
+  `)
+})
 
-// Home page
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, "pair.html")));
+app.listen(PORT, () => {
+  console.log(`🌐 Server running on port ${PORT}`)
+})
 
-app.listen(PORT, () => console.log(`DARKCORE-XMD Pair Site running on port ${PORT}`));
+startBot()
+
 
 
