@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DARKCORE-XMD Pair</title>
+
+<style>
+body {
+  background:#020617;
+  color:#fff;
+  font-family:Arial;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.box {
+  background:#020617;
+  border:1px solid #1e293b;
+  padding:25px;
+  border-radius:10px;
+  width:100%;
+  max-width:360px;
+  text-align:center;
+}
+input, button {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:6px;
+  border:none;
+}
+button {
+  background:#22c55e;
+  font-weight:bold;
+  cursor:pointer;
+}
+#code {
+  margin-top:15px;
+  font-size:20px;
+  color:#38bdf8;
+  word-break:break-all;
+}
+</style>
+</head>
+
+<body>
+<div class="box">
+  <h2>DARKCORE-XMD</h2>
+  <p>Enter WhatsApp Number</p>
+  <input id="num" placeholder="2567XXXXXXXX" />
+  <button onclick="getCode()">Generate Pair Code</button>
+  <div id="code"></div>
+</div>
+
+<script>
+async function getCode(){
+  const num = document.getElementById("num").value.trim();
+  if(!num) return alert("Enter phone number");
+
+  document.getElementById("code").innerText = "Generating...";
+
+  const r = await fetch(`/api/pair?number=${num}`);
+  const d = await r.json();
+
+  document.getElementById("code").innerText =
+    d.code || d.error || "Failed";
+}
+</script>
+</body>
+  </html>
